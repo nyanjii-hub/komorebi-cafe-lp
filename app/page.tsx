@@ -16,21 +16,21 @@ const menuItems = [
     price: "1,680円",
     text: "土鍋ごはん、旬野菜の小鉢、味噌汁を少しずつ楽しめる一番人気のランチ。",
     image:
-      "https://images.unsplash.com/photo-1565065020917-c8c2de7c3f96?auto=format&fit=crop&w=900&q=80",
+      "/images/menu-lunch.jpg",
   },
   {
     name: "深煎りブレンド珈琲",
     price: "620円",
     text: "梁の下でゆっくり味わう、香ばしさと余韻を大切にした自家焙煎珈琲。",
     image:
-      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=80",
+      "/images/menu-coffee.jpg",
   },
   {
     name: "黒糖チーズケーキ",
     price: "720円",
     text: "黒糖のこくとやわらかな酸味を重ねた、珈琲によく合う甘味。",
     image:
-      "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=900&q=80",
+      "/images/menu-dessert.jpg",
   },
 ];
 
@@ -74,15 +74,15 @@ const faqs = [
 
 const gallery = [
   {
-    src: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=1200&q=80",
+    src: "/images/gallery-interior.jpg",
     alt: "木の質感が残る落ち着いたカフェ店内",
   },
   {
-    src: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=1200&q=80",
+    src: "/images/gallery-garden.jpg",
     alt: "庭を眺めながら珈琲を楽しむ席",
   },
   {
-    src: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1200&q=80",
+    src: "/images/menu-coffee.jpg",
     alt: "丁寧に淹れた珈琲",
   },
 ];
@@ -152,16 +152,16 @@ function CtaButton({
 export default function Home() {
   return (
     <main className="overflow-hidden bg-rice text-sumi">
-      <section className="relative min-h-[92vh] bg-sumi text-paper">
+      <section className="relative h-[92vh] min-h-[680px] overflow-hidden bg-sumi text-paper">
         <Image
-          src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=1800&q=85"
+          src="/images/hero-cafe.jpg"
           alt="古民家カフェの落ち着いた木のテーブルと珈琲"
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-[0.58]"
+          className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-sumi/78 via-sumi/52 to-sumi/86" />
+        <div className="absolute inset-0 bg-gradient-to-b from-sumi/70 via-sumi/45 to-sumi/82" />
         <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-5 py-5 sm:px-8">
           <a href="#" className="font-serif text-xl font-semibold">
             古民家カフェ こもれび
@@ -232,14 +232,15 @@ export default function Home() {
           <div className="grid gap-6 md:grid-cols-3">
             {menuItems.map((item) => (
               <article key={item.name} className="overflow-hidden rounded-md bg-rice shadow-soft">
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  width={900}
-                  height={620}
-                  sizes="(min-width: 768px) 33vw, 100vw"
-                  className="h-56 w-full object-cover"
-                />
+                <div className="relative h-56 w-full overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    fill
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
                 <div className="p-6">
                   <div className="flex items-start justify-between gap-4">
                     <h3 className="font-serif text-2xl font-semibold leading-snug">
@@ -263,25 +264,29 @@ export default function Home() {
             text="写真が映える余白を広く取り、空間の静けさと古民家らしい質感を伝えるギャラリーにしました。"
           />
           <div className="grid gap-4 md:grid-cols-[1.15fr_0.85fr]">
-            <Image
-              src={gallery[0].src}
-              alt={gallery[0].alt}
-              width={1200}
-              height={920}
-              sizes="(min-width: 768px) 58vw, 100vw"
-              className="h-80 w-full rounded-md object-cover shadow-soft md:h-full"
-            />
+            <div className="relative h-80 w-full overflow-hidden rounded-md shadow-soft md:h-full md:min-h-[536px]">
+              <Image
+                src={gallery[0].src}
+                alt={gallery[0].alt}
+                fill
+                sizes="(min-width: 768px) 58vw, 100vw"
+                className="object-cover"
+              />
+            </div>
             <div className="grid gap-4">
               {gallery.slice(1).map((image) => (
-                <Image
+                <div
                   key={image.alt}
-                  src={image.src}
-                  alt={image.alt}
-                  width={1200}
-                  height={720}
-                  sizes="(min-width: 768px) 42vw, 100vw"
-                  className="h-64 w-full rounded-md object-cover shadow-soft"
-                />
+                  className="relative h-64 w-full overflow-hidden rounded-md shadow-soft"
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    sizes="(min-width: 768px) 42vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
               ))}
             </div>
           </div>
